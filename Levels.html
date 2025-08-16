@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Select Level</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hdr">
+    <a class="back" href="categories.html" onclick="return nav.replace('categories.html')">Categories</a>
+    <h1>Choose Difficulty</h1>
+  </header>
+
+  <main class="container center">
+    <div class="btn-col big">
+      <button class="btn level" id="easyBtn">Easy</button>
+      <button class="btn level" id="modBtn">Moderate</button>
+      <button class="btn level" id="difBtn">Difficult</button>
+    </div>
+  </main>
+
+<script src="js/nav.js"></script>
+<script>
+  const sp = new URLSearchParams(location.search);
+  const base = 'quiz.html?' + sp.toString();
+  document.getElementById('easyBtn').onclick = ()=> nav.replace(base + (sp.toString()?'&':'') + 'level=easy');
+  document.getElementById('modBtn').onclick  = ()=> nav.replace(base + (sp.toString()?'&':'') + 'level=moderate');
+  document.getElementById('difBtn').onclick  = ()=> nav.replace(base + (sp.toString()?'&':'') + 'level=difficult');
+</script>
+</body>
+</html>
