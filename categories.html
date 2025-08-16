@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Choose Category</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hdr">
+    <a class="back" href="home.html" onclick="return nav.replace('home.html')">Home</a>
+    <h1>Choose Category</h1>
+  </header>
+
+  <main class="container">
+    <section class="card center">
+      <h2>By Testament</h2>
+      <div class="btn-col">
+        <button class="btn" onclick="nav.toLevels({category:'old'})">Old Testament</button>
+        <button class="btn" onclick="nav.toLevels({category:'new'})">New Testament</button>
+        <button class="btn" onclick="nav.toLevels({category:'general'})">General</button>
+      </div>
+    </section>
+
+    <section class="card center">
+      <h2>Choose by Book</h2>
+      <div class="btn-row wrap">
+        <button class="btn" onclick="nav.replace('books.html?testament=old')">Old Testament Books</button>
+        <button class="btn" onclick="nav.replace('books.html?testament=new')">New Testament Books</button>
+      </div>
+    </section>
+
+    <section class="card center">
+      <h2>Topics</h2>
+      <div id="topics" class="btn-row wrap"></div>
+    </section>
+  </main>
+<script src="js/nav.js"></script>
+<script src="js/questions.js"></script>
+<script>
+  const el = document.getElementById('topics');
+  (window.CATEGORIES || []).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='btn'; b.textContent=t.name;
+    b.onclick=()=> nav.toLevels({category:t.key}); el.appendChild(b);
+  });
+</script>
+</body>
+</html>
