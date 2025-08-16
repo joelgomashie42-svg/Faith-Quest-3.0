@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Results</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hdr">
+    <a class="back" href="home.html" onclick="return nav.replace('home.html')">Home</a>
+    <h1>Quiz Result</h1>
+  </header>
+
+  <main class="container">
+    <section class="card center">
+      <h2 id="scoreLine">Score</h2>
+      <div class="btn-row center">
+        <button class="btn primary" id="againBtn">Play Again</button>
+        <button class="btn" onclick="nav.replace('home.html')">Home</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Review Wrong Answers</h3>
+      <div id="wrongList"></div>
+    </section>
+  </main>
+
+<script src="js/nav.js"></script>
+<script>
+  const r = JSON.parse(localStorage.getItem('faith_last_result')||'{}');
+  document.getElementById('scoreLine').innerText = r.score!=null
+    ? `You scored ${r.score} / ${r.total} (${r.title || ''})` : 'No recent result.';
+  const wl = document.getElementById('wrongList');
+  (r.wrong||[]).forEach(w=>{
+    const d=document.createElement('div'); d.className='wrong';
+    d.innerHTML = `<strong>${w.q}</strong><div class="small muted">Correct: ${w.correct} • Your answer: ${w.your}</div>`;
+    wl.appendChild(d);
+  });
+  document.getElementById('againBtn').onclick = ()=> {
+    const base = r.type && r.type.startsWith('book:')
+      ? `levels.html?category=book&book=${encodeURIComponent(r.type.split(':')[1])}`
+      : `levels.html?category=${encodeURIComponent(r.type||'general')}`;
+    nav.replace(base);
+  };
+</script>
+</body>
+</html>
