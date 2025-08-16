@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Choose a Book</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hdr">
+    <a class="back" href="categories.html" onclick="return nav.replace('categories.html')">Categories</a>
+    <h1>Choose a Book</h1>
+  </header>
+
+  <main class="container">
+    <section class="card center">
+      <div id="bookGrid" class="btn-row wrap"></div>
+    </section>
+  </main>
+
+<script src="js/nav.js"></script>
+<script src="js/questions.js"></script>
+<script>
+  function param(n){ return new URLSearchParams(location.search).get(n); }
+  const test = (param('testament')||'old').toUpperCase();
+  const list = (window.BOOKS && window.BOOKS[test]) || [];
+  const grid = document.getElementById('bookGrid');
+
+  list.forEach(b=>{
+    const btn=document.createElement('button');
+    btn.className='btn';
+    btn.textContent=b.name;
+    btn.onclick=()=> nav.toLevels({category:'book', book:b.key});
+    grid.appendChild(btn);
+  });
+</script>
+</body>
+</html>
