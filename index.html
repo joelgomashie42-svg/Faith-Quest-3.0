@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Faith Quest</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="images/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="splash">
+  <div class="splash-center">
+    <div class="icon-wrap">
+      <img id="splashIcon" src="images/faith-quest-icon.png" alt="Faith Quest Icon" />
+    </div>
+    <div id="titleWrap" class="title-wrap" aria-label="Faith Quest"></div>
+  </div>
+<script src="js/nav.js"></script>
+<script src="js/splash.js"></script>
+<script>
+  // Register SW on splash so it’s cached early
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('service-worker.js');
+</script>
+</body>
+</html>
