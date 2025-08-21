@@ -10,7 +10,7 @@ const qTextEl  = document.getElementById('qText');
 const optsEl   = document.getElementById('options');
 const pBar     = document.getElementById('progressBar');
 
-let pool=[], idx=0, score=0, wrong=[];
+let pool=[], idx=0, score=0, wrong=[], answers=[];
 
 function isOld(k){ return (window.BOOKS?.OLD||[]).some(b=>b.key===k); }
 function isNew(k){ return (window.BOOKS?.NEW||[]).some(b=>b.key===k); }
@@ -43,6 +43,9 @@ function buildPool(){
   // shuffle + limit 10
   for(let i=pool.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; }
   pool = pool.slice(0,10);
+  
+  // Initialize answers array
+  answers = new Array(pool.length).fill(null);
 
   titleEl.textContent = (bookKey
     ? `${(window.BOOKS.OLD.concat(window.BOOKS.NEW).find(b=>b.key===bookKey)||{}).name||'Book'}`
@@ -61,7 +64,19 @@ function render(){
   q.options.forEach((opt,i)=>{
     const b=document.createElement('button');
     b.className='option'; b.textContent=opt;
-    b.onclick=()=> choose(b,i,q);
+    
+    // Check if this question was already answered
+    if (answers[idx] !== null) {
+      b.disabled = true;
+      if (i === q.answer) {
+        b.classList.add('correct');
+      } else if (i === answers[idx]) {
+        b.classList.add('wrong');
+      }
+    } else {
+      b.onclick=()=> choose(b,i,q);
+    }
+    
     optsEl.appendChild(b);
   });
 
@@ -69,6 +84,12 @@ function render(){
 }
 
 function choose(btn,i,q){
+  // Don't allow choosing if already answered
+  if (answers[idx] !== null) return;
+  
+  // Store the answer
+  answers[idx] = i;
+  
   const buttons=[...document.querySelectorAll('.option')];
   buttons.forEach(b=> b.disabled=true);
   if (i===q.answer){ btn.classList.add('correct'); toneOK(); score++; }
@@ -87,7 +108,12 @@ function finish(){
   nav.replace('results.html');
 }
 
-document.getElementById('prevBtn').onclick = ()=> { if(idx>0){ idx--; render(); } };
+document.getElementById('prevBtn').onclick = ()=> { 
+  if(idx>0){ 
+    idx--; 
+    render(); 
+  } 
+};
 document.getElementById('nextBtn').onclick = ()=> { if(idx<pool.length-1){ idx++; render(); } else finish(); };
 document.getElementById('endBtn').onclick  = ()=> { if (confirm('End quiz?')) finish(); };
 

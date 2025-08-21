@@ -17,5 +17,13 @@ window.nav = {
     const qs = new URLSearchParams(); qs.set('category', category); if (book) qs.set('book', book);
     location.replace('levels.html?' + qs.toString());
     return false;
+  },
+  
+  // App-like navigation - always go to home on back
+  handleBackButton() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      location.replace("home.html");
+    };
   }
 };
