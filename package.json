@@ -1,0 +1,9 @@
+{
+  "name": "faith-quest",
+  "version": "1.0.0",
+  "description": "A Bible quiz PWA",
+  "scripts": {
+    "build": "echo 'Build process not yet defined. Static files are ready.'"
+  },
+  "private": true
+}
