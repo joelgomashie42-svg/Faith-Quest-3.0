@@ -33,5 +33,12 @@
     grid.appendChild(btn);
   });
 </script>
+<script>
+  // Redirect back button to home page instead of cycling through history
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    location.href = "home.html";
+  };
+</script>
 </body>
 </html>
