@@ -27,5 +27,12 @@
   document.getElementById('modBtn').onclick  = ()=> nav.replace(base + (sp.toString()?'&':'') + 'level=moderate');
   document.getElementById('difBtn').onclick  = ()=> nav.replace(base + (sp.toString()?'&':'') + 'level=difficult');
 </script>
+<script>
+  // Redirect back button to home page instead of cycling through history
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    location.href = "home.html";
+  };
+</script>
 </body>
 </html>
