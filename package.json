@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A Bible quiz PWA",
   "scripts": {
-    "build": "echo 'Build process not yet defined. Static files are ready.'"
+    "build": "echo 'Static PWA - no build needed' && exit 0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {}
 }
