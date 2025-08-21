@@ -44,5 +44,12 @@
     b.onclick=()=> nav.toLevels({category:t.key}); el.appendChild(b);
   });
 </script>
+<script>
+  // Redirect back button to home page instead of cycling through history
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    location.href = "home.html";
+  };
+</script>
 </body>
 </html>
