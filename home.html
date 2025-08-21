@@ -1,32 +1,30 @@
-<!doctype html>
+<!-- home.html -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Faith Quest</title>
-  <meta name="theme-color" content="#0b63a6"/>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="images/icon-192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faith Quest - Home</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="hdr"><h1>Faith Quest</h1></header>
+  <header>
+    <img src="images/faith-quest-icon.png" alt="App Icon" class="app-logo">
+    <h1>Faith Quest</h1>
+  </header>
 
-  <main class="container home">
-    <img src="images/faith-quest-icon.png" alt="Faith Quest Icon" class="app-icon"/>
-    <p class="tagline">Grow in Grace & Truth</p>
-
-    <section id="verse-box" class="card">
+  <main class="home-container">
+    <section class="verse-section">
       <h2>Verse of the Day</h2>
       <p id="verse">Loading verse...</p>
     </section>
 
-    <div class="btn-col">
-      <button class="btn primary" onclick="location.href='categories.html'">Start Quiz</button>
-      <button class="btn" onclick="location.href='about.html'">About</button>
-    </div>
+    <section class="home-actions">
+      <a href="categories.html" class="btn">Start Quiz</a>
+      <a href="about.html" class="btn secondary">About</a>
+    </section>
   </main>
 
-  <script src="js/main.js"></script>
+  <script src="js/verse.js"></script>
 </body>
 </html>
